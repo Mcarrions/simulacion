@@ -17,27 +17,28 @@ public class ProyectoDeSimulacion {
      */
     public static void main(String[] args) {
         
-        
-       double count = 0, success=0, repetitions=7000;
-       double percentage, chance = 1.0/500.0;
+       workThread thread = new workThread(); 
+       double repetitions=1000;
+       double percentage, chance = 1.0;
+       contadorClass count = new contadorClass();
        int processors = Runtime.getRuntime().availableProcessors();
-       Random rand = new Random();
-        System.out.println(repetitions/processors+" repeticiones por nucleo");
-     do{
-         
-      if(chance <=rand.nextFloat()){
-          
-        } 
-      else {
-          //System.out.println("True");
-          success++;
+       double assignPerThread = repetitions/processors;
+
+       
+       System.out.println(assignPerThread+" repeticiones por nucleo");
+       
+       if(processors>repetitions){
+           for (int i = 0; i < repetitions; i++) {
+               thread.run(repetitions, chance, count);
+               
            }
-      count++;
-      percentage = ((count)/repetitions)*100;
-      
-      //System.out.println(percentage+"%");
-     }while(count<repetitions);
-        System.out.println(success+" exito(s)");
+       }
+       else{
+           for (int i = 0; i < assignPerThread; i++) {
+              thread.run(assignPerThread, chance, count);
+           }
+       }
+       
+        System.out.println("Total de exitos:"+count.returnContador());
     }
-    
 }
