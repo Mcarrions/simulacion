@@ -18,7 +18,7 @@ public class ProyectoDeSimulacion {
     public static void main(String[] args) {
         
        workThread thread = new workThread(); 
-       double repetitions=1000;
+       double repetitions=400;
        double percentage, chance = 1.0;
        contadorClass count = new contadorClass();
        int processors = Runtime.getRuntime().availableProcessors();
@@ -29,14 +29,14 @@ public class ProyectoDeSimulacion {
        
        if(processors>repetitions){
            for (int i = 0; i < repetitions; i++) {
-               thread.run(repetitions, chance, count);
+               thread.run(1, chance, count);
                
            }
        }
        else{
-           for (int i = 0; i < assignPerThread; i++) {
-              thread.run(assignPerThread, chance, count);
-           }
+              for (int i = 0; i < processors; i++) {
+               thread.run(assignPerThread, chance, count);
+            }   
        }
        
         System.out.println("Total de exitos:"+count.returnContador());

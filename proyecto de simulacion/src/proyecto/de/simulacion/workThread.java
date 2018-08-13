@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class workThread extends Thread  {
     
-    public void run(double repetitions, double chance, double success, contadorClass count, double percentage){
+    public void run(double repetitions, double chance, contadorClass count){
         Random rand = new Random();
         double repeats = 0.0;
         
@@ -23,7 +23,7 @@ public class workThread extends Thread  {
           } 
         else {
             //System.out.println("True");
-            success++;
+            
             count.incrementContador();
              }
         
